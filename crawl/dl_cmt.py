@@ -59,7 +59,7 @@ def dl_cmt_page(hotel):
     browser.get(url)
 
     js="var q=document.documentElement.scrollTop=10000"
-    driver.execute_script(js)
+    browser.execute_script(js)
     time.sleep(1)
     page = 1
     html = browser.page_source
