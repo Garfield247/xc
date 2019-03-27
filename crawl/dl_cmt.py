@@ -61,7 +61,7 @@ def dl_cmt_page(hotel):
     html = browser.page_source
     body = BeautifulSoup(html,"html.parser")
     # pages = int(re.findall(r'\((\d+)\)',body.find('span',{"id":"All_Comment"}).get_text())[0])/15+1
-    page = 2
+    pages = 2
     while page<pages:
         html = browser.page_source
         parse_cmt(html,hotel)
