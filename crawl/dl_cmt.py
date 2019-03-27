@@ -51,19 +51,25 @@ def parse_cmt(html,hotel):
 def dl_cmt_page(hotel):
     url = hotel['url']
     opt = webdriver.ChromeOptions()
-    prefs = {"profile.managed_default_content_settings.images": 2}
+    prefs = {"profile.managed_default_content_settings_values":{
+        'images': 2,
+        'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36'
+        }}
+
     opt.add_experimental_option("prefs", prefs)
     opt.add_argument('disable-infobars')
-    opt.add_experimental_option('excludeSwitches', ['enable-automation'])
-    opt.add_argument('--headless')
+
+    # opt.add_argument('--headless')
     opt.add_argument('--no-sandbox')
     opt.add_argument('--disable-extensions')
     opt.add_argument('--disable-gpu')
+    opt.add_argument('--window-size=1280,800')  # 设置窗口大小
+    opt.add_experimental_option('excludeSwitches', ['enable-automation'])
     browser = webdriver.Chrome(options=opt)
     browser.get(url)
 
-    # js="var q=document.documentElement.scrollTop=10000"
-    # browser.execute_script(js)
+    js="var q=document.documentElement.scrollTop=10000"
+    browser.execute_script(js)
     # time.sleep(10)
     page = 1
     html = browser.page_source
@@ -74,6 +80,7 @@ def dl_cmt_page(hotel):
         html = browser.page_source
         parse_cmt(html,hotel)
         page += 1
+        print('**************【%d】**************'%page)
         input = browser.find_element_by_xpath("//input[@id='cPageNum']")
         input.clear()
         input.send_keys(page)

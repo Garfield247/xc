@@ -21,7 +21,7 @@ def get_prices(url):
     opt.add_experimental_option('excludeSwitches', ['enable-automation'])
     opt.add_argument('--headless')
     opt.add_argument('--no-sandbox')
-    opt.add_argument('--disable-extensions')
+    # opt.add_argument('--disable-extensions')
     opt.add_argument('--disable-gpu')
     browser = webdriver.Chrome(options=opt)
     browser.get(url)
