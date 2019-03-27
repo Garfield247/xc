@@ -17,7 +17,7 @@ def save_data(hotel):
     city_name = hotel['city_name']
     hotel_name = hotel['name']
     data = json.dumps(hotel,ensure_ascii=False)
-    file_path = os.path.abspath('./data/%s/'%city_name)
+    file_path = os.path.abspath('../data/%s/'%city_name)
     if not os.path.exists(file_path):
         os.makedirs(file_path)
     file_name = os.path.join(file_path,'%s.json'%hotel_name)
