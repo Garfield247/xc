@@ -57,6 +57,7 @@ def dl_cmt_page(hotel):
     opt.add_argument('--disable-gpu')
     browser = webdriver.Chrome(options=opt)
     browser.get(url)
+    time.sleep(3)
     page = 1
     html = browser.page_source
     body = BeautifulSoup(html,"html.parser")
