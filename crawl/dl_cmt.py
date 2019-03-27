@@ -51,11 +51,7 @@ def parse_cmt(html,hotel):
 def dl_cmt_page(hotel):
     url = hotel['url']
     opt = webdriver.ChromeOptions()
-    prefs = {"profile.managed_default_content_settings_values":{
-        'images': 2,
-        'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36'
-        }}
-
+    prefs = {"profile.managed_default_content_settings.images": 2}
     opt.add_experimental_option("prefs", prefs)
     opt.add_argument('disable-infobars')
 
