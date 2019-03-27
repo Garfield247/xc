@@ -51,6 +51,10 @@ def parse_cmt(html,hotel):
 def dl_cmt_page(hotel):
     url = hotel['url']
     opt = webdriver.ChromeOptions()
+    prefs = {"profile.managed_default_content_settings.images": 2}
+    opt.add_experimental_option("prefs", prefs)
+    opt.add_argument('disable-infobars')
+    opt.add_experimental_option('excludeSwitches', ['enable-automation'])
     opt.add_argument('--headless')
     opt.add_argument('--no-sandbox')
     opt.add_argument('--disable-extensions')
@@ -58,9 +62,9 @@ def dl_cmt_page(hotel):
     browser = webdriver.Chrome(options=opt)
     browser.get(url)
 
-    js="var q=document.documentElement.scrollTop=10000"
-    browser.execute_script(js)
-    time.sleep(1)
+    # js="var q=document.documentElement.scrollTop=10000"
+    # browser.execute_script(js)
+    # time.sleep(10)
     page = 1
     html = browser.page_source
     body = BeautifulSoup(html,"html.parser")

@@ -15,6 +15,10 @@ from selenium.webdriver.common.keys import Keys
 
 def get_prices(url):
     opt = webdriver.ChromeOptions()
+    prefs = {"profile.managed_default_content_settings.images": 2}
+    opt.add_experimental_option("prefs", prefs)
+    opt.add_argument('disable-infobars')
+    opt.add_experimental_option('excludeSwitches', ['enable-automation'])
     opt.add_argument('--headless')
     opt.add_argument('--no-sandbox')
     opt.add_argument('--disable-extensions')
