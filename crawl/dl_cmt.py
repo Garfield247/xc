@@ -44,7 +44,10 @@ def parse_cmt(html,hotel):
                 item[k] = item[k][0]
             elif len(item[k])==0:
                 item[k] = None
-        item['cmt_score'] = {i[0]:i[1] for i in re.findall(r'(.*?):(.*?),',item['cmt_score']+',')}
+        try:
+            item['cmt_score'] = {i[0]:i[1] for i in re.findall(r'(.*?):(.*?),',item['cmt_score']+',')}
+        except Exception as e:
+            print('------')
         hotel['comment'] = item
         save_data(hotel)
 
@@ -65,7 +68,7 @@ def dl_cmt_page(hotel):
     while page<pages:
         html = browser.page_source
         parse_cmt(html,hotel)
-        print('{page}页采集完成')
+        print(f'{page}页采集完成')
         page += 1
         print(f'采集{page}/{pages}页')
         input = browser.find_element_by_xpath("//input[@id='cPageNum']")
