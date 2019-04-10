@@ -56,7 +56,7 @@ def dl_cmt_page(hotel):
 
     js="var q=document.documentElement.scrollTop=10000"
     browser.execute_script(js)
-    # time.sleep(10)
+    time.sleep(3)
     page = 1
     html = browser.page_source
     body = BeautifulSoup(html,"html.parser")
