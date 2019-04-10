@@ -61,12 +61,13 @@ def dl_cmt_page(hotel):
     html = browser.page_source
     body = BeautifulSoup(html,"html.parser")
     pages = int(re.findall(r'\((\d+)\)',body.find('span',{"id":"All_Comment"}).get_text())[0])/15+1
-    # pages = 2
+    print(f'共{pages}页评论')
     while page<pages:
         html = browser.page_source
         parse_cmt(html,hotel)
+        print('{page}页采集完成')
         page += 1
-        print('**************【%d】**************'%page)
+        print(f'采集{page}/{pages}页')
         input = browser.find_element_by_xpath("//input[@id='cPageNum']")
         input.clear()
         input.send_keys(page)
