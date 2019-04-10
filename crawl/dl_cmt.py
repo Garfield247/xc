@@ -46,7 +46,7 @@ def parse_cmt(html,hotel):
                 item[k] = None
         try:
             item['cmt_score'] = {i[0]:i[1] for i in re.findall(r'(.*?):(.*?),',item['cmt_score']+',')}
-        except Exception as e:
+        except Exception:
             print('------')
         hotel['comment'] = item
         save_data(hotel)
