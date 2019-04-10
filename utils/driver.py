@@ -4,6 +4,7 @@
 # @Author  : LvGang/Garfield
 # @Email   : Garfield_lv@163.com
 
+import psutil
 from selenium import webdriver
 
 def new_browser():
@@ -20,3 +21,11 @@ def new_browser():
     opt.add_experimental_option('excludeSwitches', ['enable-automation'])
     b = webdriver.Chrome(options=opt)
     return b
+
+def memory_status():
+    pc_mem = psutil.virtual_memory()
+    div_gb_factor = (1024.0 ** 3)
+    free = float('%.2f'%((pc_mem.used/pc_mem.total)*100))
+    avail = float(pc_mem.available/div_gb_factor)
+    print(f"内存占用【{free}%】\n剩余可用【{avail}GB】")
+

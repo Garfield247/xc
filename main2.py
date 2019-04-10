@@ -19,7 +19,7 @@ db = RedisDB()
 def main():
     while db.get_data_count('xchtl:hotels')>0:
         hotel = db.get_data('xchtl:hotels')
-        print(hotel)
+        print(hotel['name'])
         try:
             hotel['price'] = get_prices(hotel['url'])
             dl_cmt_page(hotel)
