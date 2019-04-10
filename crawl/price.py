@@ -10,26 +10,17 @@ import os
 import re
 from selenium import webdriver
 from lxml import etree
-import time
+from utils import new_browser
 from selenium.webdriver.common.keys import Keys
 
 def get_prices(url):
-    opt = webdriver.ChromeOptions()
-    prefs = {"profile.managed_default_content_settings.images": 2}
-    opt.add_experimental_option("prefs", prefs)
-    opt.add_argument('disable-infobars')
-    opt.add_experimental_option('excludeSwitches', ['enable-automation'])
-    opt.add_argument('--headless')
-    opt.add_argument('--no-sandbox')
-    # opt.add_argument('--disable-extensions')
-    opt.add_argument('--disable-gpu')
-    browser = webdriver.Chrome(options=opt)
+    browser = new_browser()
+    browser.delete_all_cookies()
     browser.get(url)
     page = 1
     html = browser.page_source
     page = etree.HTML(html)
     prices = list(set([t.replace(r'<span class=\"line\">|</span>','') for t in page.xpath('.//td[@class="child_name J_Col_RoomName"]/@data-baseroominfo')]))
-
     browser.close()
     print(prices)
     return prices

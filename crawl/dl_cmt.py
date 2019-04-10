@@ -9,6 +9,7 @@ import re
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from lxml import etree
+from utils import new_browser
 import time
 import json
 from selenium.webdriver.common.keys import Keys
@@ -26,7 +27,7 @@ def save_data(hotel):
 
 def parse_cmt(html,hotel):
     page = etree.HTML(html)
-    items = []
+    # items = []
     for cmt in page.xpath('.//div[@class="comment_block J_asyncCmt"]'):
         item = {}
         item['cmt_usr_name'] = cmt.xpath('.//div[@class="user_info  J_ctrip_pop"]/p[@class="name"]/span/text()')
@@ -50,18 +51,7 @@ def parse_cmt(html,hotel):
 
 def dl_cmt_page(hotel):
     url = hotel['url']
-    opt = webdriver.ChromeOptions()
-    prefs = {"profile.managed_default_content_settings.images": 2}
-    opt.add_experimental_option("prefs", prefs)
-    opt.add_argument('disable-infobars')
-
-    # opt.add_argument('--headless')
-    opt.add_argument('--no-sandbox')
-    opt.add_argument('--disable-extensions')
-    opt.add_argument('--disable-gpu')
-    opt.add_argument('--window-size=1280,800')  # 设置窗口大小
-    opt.add_experimental_option('excludeSwitches', ['enable-automation'])
-    browser = webdriver.Chrome(options=opt)
+    browser = new_browser()
     browser.get(url)
 
     js="var q=document.documentElement.scrollTop=10000"
