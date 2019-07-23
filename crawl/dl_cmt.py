@@ -54,7 +54,7 @@ def parse_cmt(html,hotel):
 
 def dl_cmt_page(hotel):
     url = hotel['url']
-    browser = new_browser()
+    browser = new_browser('firefox')
     browser.get(url)
 
     js="var q=document.documentElement.scrollTop=10000"

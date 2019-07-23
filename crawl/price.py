@@ -14,7 +14,7 @@ from utils import new_browser,memory_status
 from selenium.webdriver.common.keys import Keys
 
 def get_prices(url):
-    browser = new_browser()
+    browser = new_browser('firefox')
     memory_status()
     browser.delete_all_cookies()
     memory_status()
